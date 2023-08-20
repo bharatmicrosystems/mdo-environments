@@ -17,6 +17,6 @@ jobs:
       run: wget -O terraform.zip https://releases.hashicorp.com/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip && unzip terraform.zip && chmod +x terraform && sudo mv terraform /usr/local/bin
     - name: Apply Terraform
       id: apply-terraform
-      run: TF_BACKEND_CONFIG_bucket="tf-state-mdo-terraform-${{ secrets.PROJECT_ID }}" terraform init && terraform apply -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
+      run: terraform init -backend-config="bucket=tf-state-mdo-terraform-${{ secrets.PROJECT_ID }}" && terraform apply -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
