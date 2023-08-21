@@ -22,6 +22,7 @@ spec:
       containers:
         - name: mongodb
           image: mongo:6-jammy
+          imagePullPolicy: Always
           ports:
             - containerPort: 27017
           envFrom:
@@ -76,6 +77,7 @@ spec:
       containers:
         - name: posts
           image: bharamicrosystems/posts
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -121,6 +123,7 @@ spec:
       containers:
         - name: reviews
           image: bharamicrosystems/reviews
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -166,6 +169,7 @@ spec:
       containers:
         - name: ratings
           image: bharamicrosystems/ratings
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -211,6 +215,7 @@ spec:
       containers:
         - name: users
           image: bharamicrosystems/users
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -256,6 +261,7 @@ spec:
       containers:
         - name: frontend
           image: bharamicrosystems/frontend
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
 ---
