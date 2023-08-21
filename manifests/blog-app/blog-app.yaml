@@ -48,7 +48,7 @@ spec:
             claimName: mongodb-pvc
   volumeClaimTemplates:
     - metadata:
-        name: mongodb-data
+        name: mongodb-pvc
       spec:
         accessModes:
           - ReadWriteOnce
