@@ -3,18 +3,6 @@ kind: Namespace
 metadata:
   name: blog-app
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongodb-pvc
-  namespace: blog-app
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -45,10 +33,10 @@ spec:
       volumes:
         - name: mongodb-data
           persistentVolumeClaim:
-            claimName: mongodb-pvc
+            claimName: mongodb-data
   volumeClaimTemplates:
     - metadata:
-        name: mongodb-pvc
+        name: mongodb-data
       spec:
         accessModes:
           - ReadWriteOnce
