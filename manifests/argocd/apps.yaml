@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/bharatmicrosystems/mdo-environments.git
-      revision: HEAD
+      revision: dev
       directories:
       - path: manifests/*
       - path: manifests/argocd
@@ -19,7 +19,7 @@ spec:
       project: default
       source:
         repoURL: https://github.com/bharatmicrosystems/mdo-environments.git
-        targetRevision: HEAD
+        targetRevision: dev
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
