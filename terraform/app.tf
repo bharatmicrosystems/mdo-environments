@@ -23,15 +23,3 @@ resource "kubectl_manifest" "external-secrets" {
   yaml_body = each.value
   override_namespace = "argocd"
 }
-
-data "kubectl_path_documents" "blog-app-gcpsm-secret" {
-    pattern = "../external-secret-manifests/*.yaml"
-}
-
-resource "kubectl_manifest" "blog-app-gcpsm-secret" {
-  depends_on = [
-    kubectl_manifest.external-secrets,
-  ]
-  for_each  = toset(data.kubectl_path_documents.blog-app-gcpsm-secret.documents)
-  yaml_body = each.value
-}
