@@ -25,7 +25,7 @@ resource "kubectl_manifest" "external-secrets" {
 }
 
 data "kubectl_path_documents" "blog-app-gcpsm-secret" {
-    content = file("../external-secret-manifests/*.yaml")
+    pattern = "../external-secret-manifests/*.yaml"
 }
 
 resource "kubectl_manifest" "blog-app-gcpsm-secret" {
