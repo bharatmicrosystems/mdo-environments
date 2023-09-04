@@ -30,8 +30,8 @@ data "kubectl_file_documents" "gcpsm-secret" {
 
 resource "kubectl_manifest" "gcpsm-secrets" {
   depends_on = [
-    kubectl_manifest.argocd,
+    kubectl_manifest.external-secrets,
   ]
-  for_each  = data.kubectl_file_documents.external-secrets.manifests
+  for_each  = data.kubectl_file_documents.gcpsm-secret.manifests
   yaml_body = each.value
 }
