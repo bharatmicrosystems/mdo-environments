@@ -13,9 +13,9 @@ spec:
   data:
   - secretKey: MONGO_INITDB_ROOT_USERNAME
     remoteRef:
-      key: mongodb-creds
+      key: external-secrets
       property:  MONGO_INITDB_ROOT_USERNAME
   - secretKey: MONGO_INITDB_ROOT_PASSWORD
     remoteRef:
-      key: mongodb-creds
+      key: external-secrets
       property:  MONGO_INITDB_ROOT_PASSWORD
