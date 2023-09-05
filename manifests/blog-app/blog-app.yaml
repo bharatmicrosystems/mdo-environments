@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
         - name: posts
-          image: bharamicrosystems/posts
+          image: bharamicrosystems/mdo-posts:cf19661
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
