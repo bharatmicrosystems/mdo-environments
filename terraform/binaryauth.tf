@@ -9,6 +9,7 @@ resource "google_kms_key_ring" "qa-attestor-keyring" {
 module "qa-attestor" {
   source = "terraform-google-modules/kubernetes-engine/google//modules/binary-authorization"
   attestor-name = "quality-assurance"
+  project_id    = var.project_id
   keyring-id    = google_kms_key_ring.qa-attestor-keyring.id
 }
 
