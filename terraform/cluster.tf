@@ -8,7 +8,7 @@ resource "google_container_cluster" "main" {
   location           = var.location
   initial_node_count = 3
   binary_authorization {
-    evaluation_mode: "PROJECT_SINGLETON_POLICY_ENFORCE"
+    evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
   }
   node_config {
     service_account = google_service_account.main.email
