@@ -1,6 +1,6 @@
 resource "google_kms_key_ring" "qa-attestor-keyring" {
   name     = "qa-attestor-keyring"
-  #location = var.location
+  location = "us-central-1"
   lifecycle {
     prevent_destroy = false
   }
