@@ -20,7 +20,7 @@ jobs:
       id: 'get-credentials'
       uses: 'google-github-actions/get-gke-credentials@v1'
       with:
-        cluster_name: mdo-cluster-dev
+        cluster_name: mdo-cluster-${GITHUB_REF##*/}
         location: ${{ secrets.CLUSTER_LOCATION }}
     - name: Compute Application URL
       id: compute-application-url
