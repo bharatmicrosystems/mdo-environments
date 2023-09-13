@@ -10,9 +10,7 @@ resource "google_container_cluster" "main" {
   dynamic "binary_authorization" {
     for_each = var.branch == "prod" ? [1] : []
     content {
-      binary_authorization {
-        evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
-      }
+      evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
     }
   }
   node_config {
