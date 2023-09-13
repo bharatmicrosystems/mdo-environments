@@ -1,5 +1,5 @@
 name: Create Kubernetes Cluster
-on: push
+on: [workflow_call]
 jobs:
   deploy-terraform:
     runs-on: ubuntu-latest

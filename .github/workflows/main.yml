@@ -1,0 +1,14 @@
+name: Continuous Delivery Workflow
+on: push
+jobs:
+  deploy-app:
+    name: Create Environment and Deploy App
+    uses: ./.github/workflows/create-cluster.yml
+  run-tests:
+    name: Run Integration Tests
+    needs: [deploy-app]
+    uses: ./.github/workflows/run-tests.yml
+  binary-auth:
+    name: Attest Images
+    needs: [run-tests]
+    uses: ./.github/workflows/attest-images.yml 
