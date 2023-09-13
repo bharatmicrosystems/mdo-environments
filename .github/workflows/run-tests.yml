@@ -3,9 +3,6 @@ on: [workflow_call]
 jobs:
   test-application:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./tests
     steps:
     - id: gcloud-auth
       name: Authenticate with gcloud
@@ -20,4 +17,4 @@ jobs:
       run: gcloud container clusters get-credentials mdo-cluster-dev --zone ${{ secrets.CLUSTER_LOCATION }} --project ${{ secrets.PROJECT_ID }} && external_ip=$(kubectl get svc -n blog-app frontend --output jsonpath='{.status.loadBalancer.ingress[0].ip}') && sed -i "s/localhost/${external_ip}/g" integration-test.py
     - id: run-integration-test
       name: Run Integration Test
-      run: python3 integration-test.py
+      run: python3 tests/integration-test.py
