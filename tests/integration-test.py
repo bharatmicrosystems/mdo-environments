@@ -2,8 +2,7 @@ import requests
 import re
 
 # Define the base URL of your Flask app
-BASE_URL = 'http://localhost:8080'  # Update with the correct URL
-# Define test data (replace with valid test data)
+BASE_URL = 'http://localhost'
 test_user = {
     'email': 'test@example.com',
     'password': 'password',
