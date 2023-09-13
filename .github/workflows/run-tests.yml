@@ -20,7 +20,7 @@ jobs:
         location: ${{ secrets.CLUSTER_LOCATION }}
     - name: Compute Application URL
       id: compute-application-url
-      run: external_ip=$(kubectl get svc -n blog-app frontend --output jsonpath='{.status.loadBalancer.ingress[0].ip}') && sed -i "s/localhost/${external_ip}/g" integration-test.py
+      run: external_ip=$(kubectl get svc -n blog-app frontend --output jsonpath='{.status.loadBalancer.ingress[0].ip}') && sed -i "s/localhost/${external_ip}/g" tests/integration-test.py
     - id: run-integration-test
       name: Run Integration Test
       run: python3 tests/integration-test.py
