@@ -8,6 +8,9 @@ jobs:
         working-directory: ./tests
     steps:
     - uses: actions/checkout@v2
+    - name: Extract branch name
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
     - id: gcloud-auth
       name: Authenticate with gcloud
       uses: 'google-github-actions/auth@v1'
@@ -20,7 +23,7 @@ jobs:
       id: 'get-credentials'
       uses: 'google-github-actions/get-gke-credentials@v1'
       with:
-        cluster_name: mdo-cluster-${GITHUB_REF##*/}
+        cluster_name: mdo-cluster-${{ steps.extract_branch.outputs.branch }}
         location: ${{ secrets.CLUSTER_LOCATION }}
     - name: Compute Application URL
       id: compute-application-url
