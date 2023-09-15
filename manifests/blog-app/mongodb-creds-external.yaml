@@ -6,7 +6,7 @@ metadata:
   namespace: blog-app
 spec:
   secretStoreRef:
-    kind: SecretStore
+    kind: ClusterSecretStore
     name: gcp-backend
   target:
     name: mongodb-creds
