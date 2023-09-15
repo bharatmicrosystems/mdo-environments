@@ -1,7 +1,7 @@
 name: Raise Pull Request
 on: [workflow_call]
 jobs:
-  test-application:
+  raise-pull-request:
     runs-on: ubuntu-latest
     defaults:
       run:
