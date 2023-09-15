@@ -1,8 +1,11 @@
-name: Build, Test, and Raise Pull Request
+name: Raise Pull Request
 on: [workflow_call]
 jobs:
-  build:
+  test-application:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tests
     steps:
       - uses: actions/checkout@v2
       - name: Raise a Pull Request
