@@ -1,4 +1,4 @@
-name: Create Kubernetes Cluster
+name: Attest Images
 on: [workflow_call]
 jobs:
   binary-auth:
