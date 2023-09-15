@@ -18,6 +18,6 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v1'
     - name: Install gcloud beta
       id: install-gcloud-beta
-      run: yes | gcloud components install beta
+      run: gcloud components install beta
     - name: Attest Images
       run: for image in $(cat ./manifests/blog-app/blog-app.yaml | grep 'image:' | awk {'print $2'} | grep 'mdo-'); do DIGEST=$(docker pull $image | grep Digest | awk {'print $2'}); image_name=$(echo $image | awk -F ':' {'print $1'}); gcloud beta container binauthz attestations sign-and-create --artifact-url="docker.io/${image_name}@${DIGEST}" --attestor="${{ secrets.ATTESTOR_NAME }}" --attestor-project="${{ secrets.PROJECT_ID }}" --keyversion-project="${{ secrets.PROJECT_ID }}" --keyversion-location="${{ secrets.KMS_KEY_LOCATION }}" --keyversion-keyring="${{ secrets.KMS_KEYRING_NAME }}" --keyversion-key="${{ secrets.KMS_KEY_NAME }}" --keyversion="${{ secrets.KMS_KEY_VERSION }}"; done
