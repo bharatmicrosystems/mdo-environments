@@ -1,7 +1,5 @@
 name: Build, Test, and Raise Pull Request
-on:
-  push:
-    branches: [ dev ]
+on: [workflow_call]
 jobs:
   build:
     runs-on: ubuntu-latest
