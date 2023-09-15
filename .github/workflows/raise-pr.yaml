@@ -1,1 +1,15 @@
-
+name: Build, Test, and Raise Pull Request
+on:
+  push:
+    branches: [ dev ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Raise a Pull Request
+        id: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: prod
+          github_token: ${{ secrets.GH_TOKEN }}
