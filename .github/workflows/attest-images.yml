@@ -36,20 +36,12 @@ jobs:
             echo "Image $image has DIGEST"
             image_to_attest="${prefix}${image}"
           else
-            DIGEST=$(docker pull $image | grep Digest | awk {'print $2'})
-            image_name=$(echo $image | awk -F ':' {'print $1'})
-            image_to_attest="${prefix}${image_name}@${DIGEST}"
+            echo "All images should be in the SHA256 digest format"
+            exit 1
           fi
-          escaped_image=$(printf '%s\n' "${image}" | sed -e 's/[]\/$*.^[]/\\&/g')
-          escaped_image_to_attest=$(printf '%s\n' "${image_to_attest}" | sed -e 's/[]\/$*.^[]/\\&/g')
           echo "Processing $image"
-          grep -rl $image ./manifests/blog-app | xargs sed -i "s/${escaped_image}/${escaped_image_to_attest}/g"
           attestation_present=$(gcloud beta container binauthz attestations list --attestor-project="${{ secrets.PROJECT_ID }}" --attestor="${{ secrets.ATTESTOR_NAME }}" --artifact-url="${image_to_attest}")
           if [ -z "${attestation_present// }" ]; then
             gcloud beta container binauthz attestations sign-and-create --artifact-url="${image_to_attest}" --attestor="${{ secrets.ATTESTOR_NAME }}" --attestor-project="${{ secrets.PROJECT_ID }}" --keyversion-project="${{ secrets.PROJECT_ID }}" --keyversion-location="${{ secrets.KMS_KEY_LOCATION }}" --keyversion-keyring="${{ secrets.KMS_KEYRING_NAME }}" --keyversion-key="${{ secrets.KMS_KEY_NAME }}" --keyversion="${{ secrets.KMS_KEY_VERSION }}"
           fi
         done
-    - name: commit-changes
-      uses: EndBug/add-and-commit@v9
-      with:
-        default_author: github_actions
