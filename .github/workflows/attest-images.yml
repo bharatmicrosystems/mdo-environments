@@ -23,7 +23,7 @@ jobs:
       run: |
         grep -ir "image:" ./manifests | awk {'print $3'} > ./images
         echo "ghcr.io/external-secrets/external-secrets:v0.9.4" >> ./images
-        for image in $(grep -ir "image:" ./manifests | awk {'print $3'}); do
+        for image in $(cat ./images); do
           no_of_slash=$(echo $image | tr -cd '/' | wc -c)
           if [ $no_of_slash -eq 1 ]; then
             image="docker.io/$image"
