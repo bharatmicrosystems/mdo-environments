@@ -7,3 +7,8 @@ jobs:
     name: Create Environment and Deploy App
     uses: ./.github/workflows/create-cluster.yml
     secrets: inherit
+  run-tests:
+    name: Run Integration Tests
+    needs: [create-environment-and-deploy-app]
+    uses: ./.github/workflows/run-tests.yml
+    secrets: inherit
