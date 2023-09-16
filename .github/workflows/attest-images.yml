@@ -21,20 +21,27 @@ jobs:
       run: gcloud components install beta
     - name: Attest Images
       run: |
-        grep -ir "image:" ./manifests | awk {'print $3'} > ./images
-        echo "ghcr.io/external-secrets/external-secrets:v0.9.4" >> ./images
+        grep -ir "image:" ./manifests/blog-app/ | awk {'print $3'} | sort -t: -u -k1,1 > ./images
         for image in $(cat ./images); do
           no_of_slash=$(echo $image | tr -cd '/' | wc -c)
+          prefix=""
           if [ $no_of_slash -eq 1 ]; then
-            image="docker.io/$image"
+            prefix="docker.io/"
           fi
           if [ $no_of_slash -eq 0 ]; then
-            image="docker.io/library/$image"
+            prefix="docker.io/library/"
           fi
-          DIGEST=$(docker pull $image | grep Digest | awk {'print $2'})
-          image_name=$(echo $image | awk -F ':' {'print $1'})
-          attestation_present=$(gcloud beta container binauthz attestations list --attestor-project="${{ secrets.PROJECT_ID }}" --attestor="${{ secrets.ATTESTOR_NAME }}" --artifact-url="${image_name}@${DIGEST}")
+          image_to_attest=$image
+          if [[ $image =~ "@" ]]; then
+            echo "Image $image has DIGEST"
+            image_to_attest="${prefix}${image}"
+          else
+            echo "All images should be in the SHA256 digest format"
+            exit 1
+          fi
+          echo "Processing $image"
+          attestation_present=$(gcloud beta container binauthz attestations list --attestor-project="${{ secrets.PROJECT_ID }}" --attestor="${{ secrets.ATTESTOR_NAME }}" --artifact-url="${image_to_attest}")
           if [ -z "${attestation_present// }" ]; then
-            gcloud beta container binauthz attestations sign-and-create --artifact-url="${image_name}@${DIGEST}" --attestor="${{ secrets.ATTESTOR_NAME }}" --attestor-project="${{ secrets.PROJECT_ID }}" --keyversion-project="${{ secrets.PROJECT_ID }}" --keyversion-location="${{ secrets.KMS_KEY_LOCATION }}" --keyversion-keyring="${{ secrets.KMS_KEYRING_NAME }}" --keyversion-key="${{ secrets.KMS_KEY_NAME }}" --keyversion="${{ secrets.KMS_KEY_VERSION }}"
+            gcloud beta container binauthz attestations sign-and-create --artifact-url="${image_to_attest}" --attestor="${{ secrets.ATTESTOR_NAME }}" --attestor-project="${{ secrets.PROJECT_ID }}" --keyversion-project="${{ secrets.PROJECT_ID }}" --keyversion-location="${{ secrets.KMS_KEY_LOCATION }}" --keyversion-keyring="${{ secrets.KMS_KEYRING_NAME }}" --keyversion-key="${{ secrets.KMS_KEY_NAME }}" --keyversion="${{ secrets.KMS_KEY_VERSION }}"
           fi
         done
