@@ -7,12 +7,6 @@ resource "google_container_cluster" "main" {
   name               = "${var.cluster_name}-${var.branch}"
   location           = var.location
   initial_node_count = 3
-  dynamic "binary_authorization" {
-    for_each = var.branch == "prod" ? [1] : []
-    content {
-      evaluation_mode = "PROJECT_SINGLETON_POLICY_ENFORCE"
-    }
-  }
   node_config {
     service_account = google_service_account.main.email
     oauth_scopes = [

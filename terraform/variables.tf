@@ -17,9 +17,3 @@ variable "location" {
   description = "cluster location"
   default     = "us-central1-a"
 }
-
-variable "region" {
-  type        = string
-  description = "cluster region"
-  default     = "us-central1"
-}
