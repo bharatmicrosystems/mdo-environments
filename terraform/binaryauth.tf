@@ -1,4 +1,5 @@
 resource "google_kms_key_ring" "qa-attestor-keyring" {
+  count = var.branch == "dev" ? 1 : 0
   name     = "qa-attestor-keyring"
   location = var.region
   lifecycle {
@@ -7,6 +8,7 @@ resource "google_kms_key_ring" "qa-attestor-keyring" {
 }
 
 module "qa-attestor" {
+  count = var.branch == "dev" ? 1 : 0
   source = "terraform-google-modules/kubernetes-engine/google//modules/binary-authorization"
   attestor-name = "quality-assurance"
   project_id    = var.project_id
@@ -14,6 +16,7 @@ module "qa-attestor" {
 }
 
 resource "google_binary_authorization_policy" "policy" {
+  count = var.branch == "dev" ? 1 : 0
   global_policy_evaluation_mode = "ENABLE"
   default_admission_rule {
     evaluation_mode  = "REQUIRE_ATTESTATION"
