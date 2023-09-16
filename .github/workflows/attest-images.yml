@@ -21,7 +21,7 @@ jobs:
       run: gcloud components install beta
     - name: Attest Images
       run: |
-        for image in $(cat ./manifests/blog-app/blog-app.yaml | grep 'image:' | awk {'print $2'} | grep 'mdo-'); do
+        for image in $(cat ./manifests/blog-app/blog-app.yaml | grep 'image:' | awk {'print $2'}); do
           DIGEST=$(docker pull $image | grep Digest | awk {'print $2'})
           image_name=$(echo $image | awk -F ':' {'print $1'})
           attestation_present=$(gcloud beta container binauthz attestations list --attestor-project="${{ secrets.PROJECT_ID }}" --attestor="${{ secrets.ATTESTOR_NAME }}" --artifact-url="docker.io/${image_name}@${DIGEST}")
