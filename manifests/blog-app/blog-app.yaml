@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:6-jammy
+          image: docker.io/library/mongo@sha256:2a1093b275d9bc546135ec2e2484bb546b2a92f284b4b11c6a34275f4a963914
           imagePullPolicy: Always
           ports:
             - containerPort: 27017
@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
         - name: posts
-          image: bharamicrosystems/mdo-posts:cf19661
+          image: docker.io/bharamicrosystems/mdo-posts@sha256:b5bc1fc976a93a88cc312d24916bd1423dbb3efe25eae922bae7bf16f3ca7326
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -122,7 +122,7 @@ spec:
     spec:
       containers:
         - name: reviews
-          image: bharamicrosystems/mdo-reviews:b67b213
+          image: docker.io/bharamicrosystems/mdo-reviews@sha256:07370e90859000ff809b1cd1fd2fc45a14c5ad46e8e8ca3dbd68ba7dc4fce23c
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -168,7 +168,7 @@ spec:
     spec:
       containers:
         - name: ratings
-          image: bharamicrosystems/mdo-ratings:b77bb91
+          image: docker.io/bharamicrosystems/mdo-ratings@sha256:271981faefafb86c2d30f7d3ce39cd8b977b7dd07c022b9ed47e4e6ec5dff1b3
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -214,7 +214,7 @@ spec:
     spec:
       containers:
         - name: users
-          image: bharamicrosystems/mdo-users:baaed8f
+          image: docker.io/bharamicrosystems/mdo-users@sha256:5f5aa595bc03c53b86dadf39c928eff4b3f0553323999d9e59cec283723e0a0a
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -260,7 +260,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bharamicrosystems/mdo-frontend:59b77fb
+          image: docker.io/bharamicrosystems/mdo-frontend@sha256:873526fe6de10e04c42566bbaa47b76c18f265fd65aab29ddf3fa81f957e1a44
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
