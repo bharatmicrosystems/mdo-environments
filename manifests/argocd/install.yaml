@@ -19489,7 +19489,7 @@ spec:
         - ""
         - --appendonly
         - "no"
-        image: redis:7.0.11-alpine
+        image: docker.io/redis:7.0.11-alpine
         imagePullPolicy: Always
         name: redis
         ports:
