@@ -17,3 +17,8 @@ jobs:
     needs: [run-tests]
     uses: ./.github/workflows/attest-images.yml
     secrets: inherit
+  raise-pull-request:
+    name: Raise Pull Request
+    needs: [binary-auth]
+    uses: ./.github/workflows/raise-pr.yml
+    secrets: inherit
