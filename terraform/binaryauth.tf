@@ -39,7 +39,7 @@ resource "google_binary_authorization_policy" "policy" {
     name_pattern = "ghcr.io/dexidp/*"
   }
   admission_whitelist_patterns {
-    name_pattern = "docker.io/library/redis[@:]*"
+    name_pattern = "docker.io/redis[@:]*"
   }
   admission_whitelist_patterns {
     name_pattern = "ghcr.io/external-secrets/*"
