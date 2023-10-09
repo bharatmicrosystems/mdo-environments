@@ -35,3 +35,16 @@ resource "kubectl_manifest" "gcpsm-secrets" {
   for_each  = data.kubectl_file_documents.gcpsm-secret.manifests
   yaml_body = each.value
 }
+
+data "kubectl_file_documents" "istio" {
+    content = file("../manifests/argocd/istio.yaml")
+}
+
+resource "kubectl_manifest" "istio" {
+  depends_on = [
+    kubectl_manifest.gcpsm-secrets,
+  ]
+  for_each  = data.kubectl_file_documents.istio.manifests
+  yaml_body = each.value
+  override_namespace = "argocd"
+}
