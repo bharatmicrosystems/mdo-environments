@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: istio-base
-  namespace: istio-system
+  namespace: argo
 spec:
   project: default
   source:
@@ -13,7 +13,7 @@ spec:
       releaseName: istio-base
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: external-secrets
+    namespace: istio-system
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
@@ -24,7 +24,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: istiod
-  namespace: istio-system
+  namespace: argo
 spec:
   project: default
   source:
@@ -35,7 +35,7 @@ spec:
       releaseName: istiod
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: external-secrets
+    namespace: istio-system
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
@@ -46,7 +46,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: istio-ingress
-  namespace: istio-ingress
+  namespace: argo
 spec:
   project: default
   source:
@@ -57,7 +57,7 @@ spec:
       releaseName: istio-ingress
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: external-secrets
+    namespace: istio-ingress
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
