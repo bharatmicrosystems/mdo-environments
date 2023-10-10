@@ -28,8 +28,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: istio/istiod
+    chart: istiod
     repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.19.1
     helm:
       releaseName: istiod
   destination:
@@ -49,8 +50,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: istio/gateway
+    chart: gateway
     repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.19.1
     helm:
       releaseName: istio-ingress
   destination:
