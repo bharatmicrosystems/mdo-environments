@@ -8,7 +8,7 @@ spec:
   source:
     chart: istio/base
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.19.1
+    targetRevision: 1.19.0
     helm:
       releaseName: istio-base
   destination:
@@ -30,7 +30,7 @@ spec:
   source:
     chart: istio/istiod
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.19.1
+    targetRevision: 1.19.0
     helm:
       releaseName: istiod
   destination:
@@ -52,7 +52,7 @@ spec:
   source:
     chart: istio/gateway
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.19.1
+    targetRevision: 1.19.0
     helm:
       releaseName: istio-ingress
   destination:
