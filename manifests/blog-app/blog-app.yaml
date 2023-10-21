@@ -5,6 +5,12 @@ metadata:
   labels:
     istio-injection: enabled
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mongodb
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -21,6 +27,7 @@ spec:
       labels:
         app: mongodb
     spec:
+      serviceAccountName: mongodb
       containers:
         - name: mongodb
           image: docker.io/library/mongo@sha256:2a1093b275d9bc546135ec2e2484bb546b2a92f284b4b11c6a34275f4a963914
@@ -61,6 +68,12 @@ spec:
       port: 27017
       targetPort: 27017
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: posts
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -76,6 +89,7 @@ spec:
       labels:
         app: posts
     spec:
+      serviceAccountName: posts
       containers:
         - name: posts
           image: docker.io/bharamicrosystems/mdo-posts@sha256:b5bc1fc976a93a88cc312d24916bd1423dbb3efe25eae922bae7bf16f3ca7326
@@ -107,6 +121,12 @@ spec:
       port: 5000
       targetPort: 5000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: reviews
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -122,6 +142,7 @@ spec:
       labels:
         app: reviews
     spec:
+      serviceAccountName: reviews
       containers:
         - name: reviews
           image: docker.io/bharamicrosystems/mdo-reviews@sha256:07370e90859000ff809b1cd1fd2fc45a14c5ad46e8e8ca3dbd68ba7dc4fce23c
@@ -153,6 +174,12 @@ spec:
       port: 5000
       targetPort: 5000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ratings
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -168,6 +195,7 @@ spec:
       labels:
         app: ratings
     spec:
+      serviceAccountName: ratings
       containers:
         - name: ratings
           image: docker.io/bharamicrosystems/mdo-ratings@sha256:271981faefafb86c2d30f7d3ce39cd8b977b7dd07c022b9ed47e4e6ec5dff1b3
@@ -199,6 +227,12 @@ spec:
       port: 5000
       targetPort: 5000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: users
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -214,6 +248,7 @@ spec:
       labels:
         app: users
     spec:
+      serviceAccountName: users
       containers:
         - name: users
           image: docker.io/bharamicrosystems/mdo-users@sha256:5f5aa595bc03c53b86dadf39c928eff4b3f0553323999d9e59cec283723e0a0a
@@ -245,6 +280,12 @@ spec:
       port: 5000
       targetPort: 5000
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: frontend
+  namespace: blog-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -260,6 +301,7 @@ spec:
       labels:
         app: frontend
     spec:
+      serviceAccountName: frontend
       containers:
         - name: frontend
           image: docker.io/bharamicrosystems/mdo-frontend@sha256:873526fe6de10e04c42566bbaa47b76c18f265fd65aab29ddf3fa81f957e1a44
