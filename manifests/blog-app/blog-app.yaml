@@ -190,10 +190,12 @@ spec:
   selector:
     matchLabels:
       app: ratings
+      version: v1
   template:
     metadata:
       labels:
         app: ratings
+        version: v1
     spec:
       serviceAccountName: ratings
       containers:
@@ -226,6 +228,42 @@ spec:
     - protocol: TCP
       port: 5000
       targetPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ratings-v2
+  namespace: blog-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratings
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: ratings
+        version: v2
+    spec:
+      serviceAccountName: ratings
+      containers:
+        - name: ratings
+          image: docker.io/bharamicrosystems/mdo-ratings-v2@sha256:026e750b79a4e76c7bb7fe2640fa6c363da1d2d44f356b9b8e2649593c48b0bb
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-creds
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-creds
+                  key: MONGO_INITDB_ROOT_PASSWORD
 ---
 apiVersion: v1
 kind: ServiceAccount
