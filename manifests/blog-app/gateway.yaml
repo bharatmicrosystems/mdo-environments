@@ -8,12 +8,15 @@ spec:
     istio: ingress
   servers:
   - port:
-      number: 443
-      name: https
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      credentialName: blogapp-tls-credentials
+      number: 80
+      name: http
+      protocol: HTTP
+#      number: 443
+#      name: https
+#      protocol: HTTPS
+#    tls:
+#      mode: SIMPLE
+#      credentialName: blogapp-tls-credentials
     hosts:
     - "*"
 ---
