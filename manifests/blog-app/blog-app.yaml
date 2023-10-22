@@ -84,10 +84,12 @@ spec:
   selector:
     matchLabels:
       app: posts
+      version: v1
   template:
     metadata:
       labels:
         app: posts
+        version: v1
     spec:
       serviceAccountName: posts
       containers:
@@ -137,10 +139,12 @@ spec:
   selector:
     matchLabels:
       app: reviews
+      version: v1
   template:
     metadata:
       labels:
         app: reviews
+        version: v1
     spec:
       serviceAccountName: reviews
       containers:
@@ -281,10 +285,12 @@ spec:
   selector:
     matchLabels:
       app: users
+      version: v1
   template:
     metadata:
       labels:
         app: users
+        version: v1
     spec:
       serviceAccountName: users
       containers:
@@ -334,10 +340,12 @@ spec:
   selector:
     matchLabels:
       app: frontend
+      version: v1
   template:
     metadata:
       labels:
         app: frontend
+        version: v1
     spec:
       serviceAccountName: frontend
       containers:
