@@ -249,7 +249,7 @@ spec:
       serviceAccountName: ratings
       containers:
         - name: ratings
-          image: docker.io/bharamicrosystems/mdo-ratings-v2@sha256:026e750b79a4e76c7bb7fe2640fa6c363da1d2d44f356b9b8e2649593c48b0bb
+          image: docker.io/bharamicrosystems/mdo-ratings-v2@sha256:5480d5d6e3959b9ae5f7ae98a6135f0fd7b2f5302d76b99c709d75bb0c86565a
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
