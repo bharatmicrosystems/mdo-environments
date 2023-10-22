@@ -2,6 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: frontend
+  namespace: blog-app
 spec:
   host: frontend
   subsets:
@@ -13,6 +14,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: posts
+  namespace: blog-app
 spec:
   host: posts
   subsets:
@@ -24,6 +26,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: users
+  namespace: blog-app
 spec:
   host: users
   subsets:
@@ -35,6 +38,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: reviews
+  namespace: blog-app
 spec:
   host: reviews
   subsets:
@@ -46,6 +50,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: ratings
+  namespace: blog-app
 spec:
   host: ratings
   subsets:
