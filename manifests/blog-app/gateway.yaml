@@ -46,6 +46,8 @@ spec:
         exact: /register
     - uri:
         exact: /updateprofile
+    - uri:
+        exact: /deleteprofile
     route:
     - destination:
         host: frontend
